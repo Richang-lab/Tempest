@@ -14,6 +14,8 @@ data class CurrentWeatherEntry(
     /** embedded is used to use a another class's property for database as sql can hold only premitive data
         serialized name is used to name Gson property different than property name in class
     **/
+    val uv: Double,
+    val humidity: Int,
     @Embedded(prefix = "condition_")
     val condition: Condition,
     @SerializedName("temp_c")
@@ -58,7 +60,6 @@ val cloud: Int,
 val pressureIn: Double,
 @SerializedName("pressure_mb")
 val pressureMb: Double,
-val uv: Double,
 @SerializedName("wind_degree")
 val windDegree: Int,
 @SerializedName("gust_kph")

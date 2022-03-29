@@ -5,8 +5,10 @@ import android.net.ConnectivityManager
 import com.emix.tempest.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 
+/**
+ * we need context to use service to check internet connection
+ * */
 class ConnectivityInterceptorImpl(
     context: Context
 ) : ConnectivityInterceptor {
@@ -20,8 +22,7 @@ class ConnectivityInterceptorImpl(
     }
 
     private fun isOnline(): Boolean {
-        val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-        as ConnectivityManager
+        val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }

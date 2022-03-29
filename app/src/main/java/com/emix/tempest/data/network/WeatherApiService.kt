@@ -2,6 +2,7 @@ package com.emix.tempest.data.network
 
 import com.emix.tempest.data.network.ConnectivityInterceptor
 import com.emix.tempest.data.network.response.CurrentWeatherResponse
+import com.emix.tempest.data.network.response.FutureWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -27,11 +28,18 @@ interface WeatherApiService {
         @Query("q") location:String
     ) : Deferred<CurrentWeatherResponse>
 
+
+    @GET("forecast.json")
+    fun getFutureWeather(
+        @Query(value = "q") location: String,
+        @Query(value = "days") days: Int,
+    ) : Deferred<FutureWeatherResponse>
+
     //Static function
     companion object{
         /**
          * Interceptor modifies and observe url
-         *
+         * This function call api service while building the url
          */
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
@@ -52,7 +60,11 @@ interface WeatherApiService {
                 return@Interceptor chain.proceed(request)
             }
 
-            //to intercept every call we add interceptor with okHttpClient
+            /**
+                to intercept every call we add interceptor with okHttpClient
+                requestIntercept holds url to api
+                connectivityInterceptor check internet connection
+             */
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)

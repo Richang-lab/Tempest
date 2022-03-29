@@ -1,7 +1,8 @@
-package com.emix.tempest.data.database.unitlocalized
+package com.emix.tempest.data.database.unitlocalized.current
 
 import androidx.room.ColumnInfo
 
+//we need to give reference to these property from our table/CurrentWeatherClass
 data class MetricCurrentWeatherEntry (
     @ColumnInfo(name = "tempC")
     override val temperature: Double,
@@ -25,5 +26,11 @@ data class MetricCurrentWeatherEntry (
     override val feelsLikeTemperature: Double,
 
     @ColumnInfo(name = "visKm")
-    override val visibilityDistance: Double
-):UnitSpecificCurrentWeatherEntry
+    override val visibilityDistance: Double,
+
+    @ColumnInfo(name = "humidity")
+    override val humidity: Int,
+
+    @ColumnInfo(name = "uv")
+    override val uv: Double
+): UnitSpecificCurrentWeatherEntry

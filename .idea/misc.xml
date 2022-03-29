@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/drawable/ic_logo.xml" value="0.1345" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/drawable/splash_background.xml" value="0.1345" />
         <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/activity_main.xml" value="0.24375" />
-        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/current_weather_fragment.xml" value="0.264" />
-        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/future_detail_weather_fragment.xml" value="0.24375" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/activity_splash_screen.xml" value="0.176" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/current_weather_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/future_detail_weather_fragment.xml" value="0.2" />
         <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/future_list_weather_fragment.xml" value="0.24375" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/layout/item_future_weather.xml" value="0.264" />
         <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/menu/bottom_nav.xml" value="0.24375" />
+        <entry key="..\:/Users/richa/AndroidStudioProjects/Tempest/app/src/main/res/xml/preferences.xml" value="0.264" />
       </map>
     </option>
   </component>
