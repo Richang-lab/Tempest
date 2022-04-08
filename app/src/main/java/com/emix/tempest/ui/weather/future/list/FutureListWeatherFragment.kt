@@ -41,8 +41,13 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        hideActionBar()
         viewModel = ViewModelProvider(this, viewModelFactory)[FutureListWeatherViewModel::class.java]
         bindUI()
+    }
+
+    private fun hideActionBar(){
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {

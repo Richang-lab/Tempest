@@ -14,4 +14,5 @@ interface UnitSpecificDetailFutureWeatherEntry {
     val avgVisibilityDistance: Double
     val uv: Double
     val avgHumidity: Double
+    val conditionCode: Int
 }

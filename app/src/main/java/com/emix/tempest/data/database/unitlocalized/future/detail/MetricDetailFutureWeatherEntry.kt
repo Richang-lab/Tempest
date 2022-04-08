@@ -35,5 +35,8 @@ data class MetricDetailFutureWeatherEntry(
     override val uv: Double,
 
     @ColumnInfo(name = "avgHumidity")
-    override val avgHumidity: Double
+    override val avgHumidity: Double,
+
+    @ColumnInfo(name = "condition_code")
+    override val conditionCode: Int
 ): UnitSpecificDetailFutureWeatherEntry

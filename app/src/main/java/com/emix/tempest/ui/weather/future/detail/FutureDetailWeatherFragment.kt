@@ -11,6 +11,7 @@ import com.emix.tempest.data.database.LocalDateConverter
 import com.emix.tempest.databinding.FutureDetailWeatherFragmentBinding
 import com.emix.tempest.internal.DateNotFoundException
 import com.emix.tempest.internal.glide.GlideApp
+import com.emix.tempest.ui.base.ImageSelector
 import com.emix.tempest.ui.base.ScopedFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,6 +43,7 @@ class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        hideActionBar()
         val safeArgs = arguments?.let {
             FutureDetailWeatherFragmentArgs.fromBundle(it) }
         val date = LocalDateConverter.stringToDate(safeArgs?.dateString) ?: throw DateNotFoundException()
@@ -70,6 +72,8 @@ class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
             updateWindSpeed(weatherEntry.maxWindSpeed)
             updateVisibility(weatherEntry.avgVisibilityDistance)
             updateUv(weatherEntry.uv)
+            updateBackground(weatherEntry.conditionCode)
+            updateHumidity(weatherEntry.avgHumidity)
 
             GlideApp.with(this@FutureDetailWeatherFragment)
                 .load("https:" + weatherEntry.conditionIconUrl)
@@ -77,12 +81,23 @@ class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
         })
     }
 
+    private fun updateHumidity(humidity: Double) {
+        component.humidity.text = "${humidity.toInt()}"
+    }
+    private fun updateBackground(code:Int){
+        component.backgroundImage.setImageResource(ImageSelector.backgroundImage(code))
+    }
+
+    private fun hideActionBar(){
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
+    }
+
     private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
         return if (viewModel.isMetricUnit) metric else imperial
     }
 
     private fun updateLocation(location: String) {
-        (activity as? AppCompatActivity)?.supportActionBar?.title = location
+        component.textViewLocation.text = location
     }
 
     private fun updateDate(date: LocalDate) {
@@ -93,7 +108,8 @@ class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
     private fun updateTemperatures(temperature: Double, min: Double, max: Double) {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C", "°F")
         component.textViewTemperature.text = "$temperature$unitAbbreviation"
-        component.textViewMinMaxTemperature.text = "Min: $min$unitAbbreviation, Max: $max$unitAbbreviation"
+        component.minTemperature.text = "$min$unitAbbreviation"
+        component.maxTemperature.text = "$max$unitAbbreviation"
     }
 
     private fun updateCondition(condition: String) {
@@ -102,20 +118,20 @@ class FutureDetailWeatherFragment : ScopedFragment(), KodeinAware {
 
     private fun updatePrecipitation(precipitationVolume: Double) {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("mm", "in")
-        component.textViewPrecipitation.text = "Precipitation: $precipitationVolume $unitAbbreviation"
+        component.precipitation.text = "$precipitationVolume $unitAbbreviation"
     }
 
     private fun updateWindSpeed(windSpeed: Double) {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph", "mph")
-        component.textViewWind.text = "Wind speed: $windSpeed $unitAbbreviation"
+        component.speed.text = "${windSpeed.toInt()} $unitAbbreviation"
     }
 
     private fun updateVisibility(visibilityDistance: Double) {
         val unitAbbreviation = chooseLocalizedUnitAbbreviation("km", "mi.")
-        component.textViewVisibility.text = "Visibility: $visibilityDistance $unitAbbreviation"
+        component.visibility.text = "$visibilityDistance $unitAbbreviation"
     }
 
     private fun updateUv(uv: Double) {
-        component.textViewUv.text = "UV: $uv"
+        component.uv.text = "$uv"
     }
 }

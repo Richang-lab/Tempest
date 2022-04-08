@@ -32,5 +32,8 @@ data class MetricCurrentWeatherEntry (
     override val humidity: Int,
 
     @ColumnInfo(name = "uv")
-    override val uv: Double
+    override val uv: Double,
+
+    @ColumnInfo(name = "condition_code")
+    override val conditionCode: Int
 ): UnitSpecificCurrentWeatherEntry

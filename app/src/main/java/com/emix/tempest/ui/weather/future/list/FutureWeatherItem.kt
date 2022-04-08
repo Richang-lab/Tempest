@@ -6,6 +6,7 @@ import com.emix.tempest.R
 import com.emix.tempest.data.database.unitlocalized.future.list.MetricSimpleFutureWeatherEntry
 import com.emix.tempest.data.database.unitlocalized.future.list.UnitSpecificSimpleFutureWeatherEntry
 import com.emix.tempest.internal.glide.GlideApp
+import com.emix.tempest.ui.base.ImageSelector
 import com.xwray.groupie.Item
 import com.xwray.groupie.GroupieViewHolder
 import org.threeten.bp.format.DateTimeFormatter
@@ -21,10 +22,16 @@ class FutureWeatherItem(
             updateDate()
             updateTemperature()
             updateConditionImage()
+            updateBackgroundImage()
         }
     }
 
     override fun getLayout() = R.layout.item_future_weather
+
+    private fun GroupieViewHolder.updateBackgroundImage(){
+        val backgroundImage = this.root.findViewById<ImageView>(R.id.backgroundImage)
+        backgroundImage.setImageResource(ImageSelector.backgroundImage(weatherEntry.conditionCode))
+    }
 
     private fun GroupieViewHolder.updateDate(){
         val dtFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)

@@ -15,4 +15,5 @@ interface UnitSpecificCurrentWeatherEntry {
     val visibilityDistance: Double
     val humidity: Int
     val uv: Double
+    val conditionCode: Int
 }
